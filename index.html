@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .cat-image{
+            width: 100vw ;
+            height: auto ;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="playmeow()">
+        <img src="kat.jpg" alt="" class="cat-image">
+    </button>
+    <script>
+        function playmeow() {
+            const audio = new Audio("Cat-screaming-sound-effect.mp3")
+            audio.play();
+        }
+    </script>
+</body>
+</html>
