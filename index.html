@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,20 +12,22 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="CatButton">
- 
+
     <!-- Manifest -->
     <link rel="manifest" href="manifest.json">
- 
+
     <!-- Favicon and Apple Touch Icon -->
     <link rel="icon" href="kat.jpg" type="image/jpeg">
     <link rel="apple-touch-icon" href="kat.jpg">
+    <link rel="stylesheet" href="johnny-test-whip-crack.mp3">
     <style>
-        .cat-image{
-            width: 100vw ;
-            height: auto ;
+        .cat-image {
+            width: 100vw;
+            height: auto;
         }
     </style>
 </head>
+
 <body>
     <button onclick="playmeow()">
         <img src="kat.jpg" alt="" class="cat-image">
@@ -35,18 +38,32 @@
             audio.play();
         }
 
+        function playwhip() {
+            const audio = new Audio("johnny-test-whip-crack.mp3");
+            audio.play();
+        }
+        let lastshake = 0;
+        window.addEventListener('devicemotion', (e) => {
+            const acc = e.acceleration;
+            const treshhold = 15;
+            const now = Date.now();
+            if (now - lastshake > 1000 && math.abs(acc.x) > treshhold && Math.abs(acc.y) > treshhold) {
+                lastshake = now;
+                playwhip();
+            }});
 
-        if ('serviceWorker' in navigator){
-            window. addEventListener('load', ()=>{
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js')
-                .then((registration)=>{
-                    console.log('SW registerd: ',registration);
-            })
-                .catch((registrationError)=>{
-                    console.log('SW registration failed:', registrationError)
-                })
+                    .then((registration) => {
+                        console.log('SW registerd: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed:', registrationError)
+                    })
                 })
             }
     </script>
 </body>
+
 </html>
